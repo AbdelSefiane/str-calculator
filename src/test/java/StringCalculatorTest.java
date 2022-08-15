@@ -43,4 +43,13 @@ public class StringCalculatorTest {
         Assertions.assertEquals(6, sumResult3);
     }
 
+    @Test
+    public void addShouldAcceptOptionalFirstLineToBeDelimiterConfiguration() {
+        StringCalculator calculator = new StringCalculator();
+        Integer sumResult = calculator.sum("//;\n1");
+        Assertions.assertEquals(1, sumResult);
+        Integer sumResult2 = calculator.sum("//;\n1;2");
+        Assertions.assertEquals(3, sumResult2);
+    }
+
 }

@@ -75,4 +75,17 @@ public class StringCalculatorTest {
         Assertions.assertEquals(1000, identitySumResult);
     }
 
+    @Test
+    public void addShouldAcceptSeparatorWithMoreThanOneCharacter() {
+        StringCalculator calculator = new StringCalculator();
+        Integer sumResult = calculator.sum("//[***]\n1***2***3");
+        Assertions.assertEquals(6, sumResult);
+    }
+
+    @Test
+    public void addShouldAcceptMultipleSeparatorDefinition() {
+        StringCalculator calculator = new StringCalculator();
+        Integer sumResult = calculator.sum("//[***][**]\n1***2**3");
+        Assertions.assertEquals(6, sumResult);
+    }
 }

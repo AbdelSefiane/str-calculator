@@ -1,21 +1,35 @@
 package org.lacombe.kata;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StringCalculator {
-    public Integer sum(String s) {
+    public Integer sum(String input) {
         String separator = ",";
-        if (s.startsWith("//")) {
-            int i = s.indexOf("\n");
-            String customDelimiter = s.substring(2, i);
-            separator = customDelimiter;
-            s = s.substring(i)
-                 .trim();
+        if (input.startsWith("//[")) {
+            int configLineEndIndex = input.indexOf("\n");
+            String customDelimiter = input.substring(2, configLineEndIndex);
+            List<String> separatorList = Stream.of(customDelimiter.split("]"))
+                                               .map(sep -> sep.substring(1))
+                                               .collect(Collectors.toList());
+            input = input.substring(configLineEndIndex)
+                         .trim();
+            for (String delimiter : separatorList) {
+                input = input.replace(delimiter, separator);
+            }
         }
-        String harmonizedOutput = s.replace("\n", separator);
+        if (input.startsWith("//")) {
+            int configLineEndIndex = input.indexOf("\n");
+            String customDelimiter = input.substring(2, configLineEndIndex);
+            separator = customDelimiter;
+            input = input.substring(configLineEndIndex)
+                         .trim();
+        }
+        String harmonizedOutput = input.replace("\n", separator);
         List<Integer> operands = Stream.of(harmonizedOutput.split(separator))
                                        .filter(str -> !str.isBlank())
                                        .map(Integer::valueOf)

@@ -33,6 +33,9 @@ public class StringCalculator {
             if (operand < 0) {
                 negatifs.add(operand);
             }
+            if (accumulator > 0 && operand >= 1000) {
+                operand = 0;
+            }
             accumulator += operand;
         }
         if (negatifs.size() > 0) {

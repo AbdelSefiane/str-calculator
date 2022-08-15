@@ -65,4 +65,14 @@ public class StringCalculatorTest {
             Assertions.assertEquals("negatives not allowed: [-1, -2]", e.getMessage());
         }
     }
+
+    @Test
+    public void addShouldConsiderNumbersHigherThanUpperBoxingLimitAsZero() {
+        StringCalculator calculator = new StringCalculator();
+        Integer sumResult = calculator.sum("1,1000");
+        Assertions.assertEquals(1, sumResult);
+        Integer identitySumResult = calculator.sum("1000");
+        Assertions.assertEquals(1000, identitySumResult);
+    }
+
 }

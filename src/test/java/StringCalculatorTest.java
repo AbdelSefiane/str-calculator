@@ -46,6 +46,8 @@ public class StringCalculatorTest {
     @Test
     public void addShouldAcceptOptionalFirstLineToBeDelimiterConfiguration() {
         StringCalculator calculator = new StringCalculator();
+        Integer zeroSumResult = calculator.sum("//;\n");
+        Assertions.assertEquals(0, zeroSumResult);
         Integer sumResult = calculator.sum("//;\n1");
         Assertions.assertEquals(1, sumResult);
         Integer sumResult2 = calculator.sum("//;\n1;2");

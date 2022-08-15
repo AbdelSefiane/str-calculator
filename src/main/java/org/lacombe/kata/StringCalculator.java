@@ -3,10 +3,6 @@ package org.lacombe.kata;
 public class StringCalculator {
     public Integer sum(String s) {
         String separator = ",";
-        Integer accumulator = 0;
-        if (s.isBlank()) {
-            return 0;
-        }
         if (s.startsWith("//")) {
             int i = s.indexOf("\n");
             String customDelimiter = s.substring(2, i);
@@ -15,7 +11,15 @@ public class StringCalculator {
                  .trim();
         }
         String harmonizedOutput = s.replace("\n", separator);
-        String[] operands = harmonizedOutput.split(separator);
+        return sum(separator, harmonizedOutput);
+    }
+
+    public Integer sum(String separator, String s) {
+        if (s.isBlank()) {
+            return 0;
+        }
+        Integer accumulator = 0;
+        String[] operands = s.split(separator);
         for (String operand : operands) {
             accumulator += Integer.valueOf(operand);
         }

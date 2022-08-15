@@ -2,9 +2,14 @@ package org.lacombe.kata;
 
 public class StringCalculator {
     public Integer sum(String s) {
-        if ("".equals(s)) {
+        Integer accumulator = 0;
+        if (s.isEmpty()) {
             return 0;
         }
-        return Integer.valueOf(s);
+        String[] operands = s.split(",");
+        for (String operand : operands) {
+            accumulator += Integer.valueOf(operand);
+        }
+        return accumulator;
     }
 }

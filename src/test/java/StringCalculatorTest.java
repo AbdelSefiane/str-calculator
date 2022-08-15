@@ -54,4 +54,15 @@ public class StringCalculatorTest {
         Assertions.assertEquals(3, sumResult2);
     }
 
+    @Test
+    public void addShouldThrowExceptionOnNegatifIntegerInput() {
+        StringCalculator calculator = new StringCalculator();
+        Assertions.assertThrows(RuntimeException.class, () -> calculator.sum("-1"));
+        try {
+            calculator.sum("-1,-2");
+            Assertions.fail();
+        } catch (RuntimeException e) {
+            Assertions.assertEquals("negatives not allowed: [-1, -2]", e.getMessage());
+        }
+    }
 }

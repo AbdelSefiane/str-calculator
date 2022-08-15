@@ -31,4 +31,16 @@ public class StringCalculatorTest {
         Integer sumResult = calculator.sum("1,2,3,4,5");
         Assertions.assertEquals(15, sumResult);
     }
+
+    @Test
+    public void addShouldHandleNewLineAsSeparator() {
+        StringCalculator calculator = new StringCalculator();
+        Integer sumResult = calculator.sum("\n");
+        Assertions.assertEquals(0, sumResult);
+        Integer sumResult2 = calculator.sum("1\n");
+        Assertions.assertEquals(1, sumResult2);
+        Integer sumResult3 = calculator.sum("1\n2,3");
+        Assertions.assertEquals(6, sumResult3);
+    }
+
 }
